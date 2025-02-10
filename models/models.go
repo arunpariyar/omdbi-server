@@ -9,7 +9,7 @@ type Movie struct {
 }
 
 type SearchResult struct {
-	Search []Movie `json:"Search"`
-	TotalResults string `json:"totalResults"`
-	Response     string `json:"Response"`
+	Search       []Movie `json:"Search"`
+	TotalResults string  `json:"totalResults"`
+	Response     string  `json:"Response"`
 }
