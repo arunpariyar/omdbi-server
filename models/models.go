@@ -13,3 +13,9 @@ type SearchResult struct {
 	TotalResults string  `json:"totalResults"`
 	Response     string  `json:"Response"`
 }
+
+type Server struct {
+	Cache map[string]SearchResult
+	ApiKey string
+	BaseUrl string
+}

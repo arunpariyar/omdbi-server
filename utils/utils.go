@@ -5,11 +5,20 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"os"
 
 	"github.com/arunpariyar/omdbi-server/models"
 
 	"github.com/joho/godotenv"
 )
+
+func GetEnv() map[string]string {
+	LoadEnv()
+	
+	config := make(map[string]string)
+	config["apiKey"] = os.Getenv("OMDB_API_KEY")
+	return config
+}
 
 func LoadEnv() {
 	if err := godotenv.Load(); err != nil {

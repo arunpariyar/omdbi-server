@@ -1,23 +1,27 @@
 package main
 
 import (
-	"log"
 	"strconv"
 	"testing"
 
-	"github.com/joho/godotenv"
+	"github.com/arunpariyar/omdbi-server/server"
+	"github.com/arunpariyar/omdbi-server/utils"
 )
 
 type tableTest struct {
 	data   string
 	result int
 }
-func TestSearchResults(t *testing.T) {
-	err := godotenv.Load()
-	if err != nil {
-		log.Fatal("Error loading .env file")
-	}
 
+func setupTestServer() *server.Server {
+	config := utils.GetEnv()
+	testServer := server.NewServer(config["apiKey"]); 
+	return testServer 
+}
+
+func TestSearchResults(t *testing.T) {
+	
+	testServer := setupTestServer()
 	// add tableTest
 	tests := []tableTest{
 		{data: "honey", result: 638},
@@ -26,7 +30,7 @@ func TestSearchResults(t *testing.T) {
 	}
 
 	for _, test := range tests {
-		searchResult, err := SearchQuery(test.data)
+		searchResult, err := testServer.SearchQuery(test.data)
 
 		if err != nil {
 			t.Errorf("Error converting string to int: %s", err)
